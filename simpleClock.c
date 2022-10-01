@@ -94,6 +94,7 @@ int main()
 		    TotalY = Size,
 		    OffsetY = (Rows - TotalY) / 2;
 
+
 		DrawNumber(CurrentTime->tm_hour,
 				   OffsetY,
 				   OffsetX, BLOCK_DARK_GREY);	
@@ -158,8 +159,9 @@ static inline void SetBlock(Block b, int r, int c)
 {
 
 /* Bounds check.                                                              */
-	r = fmax(fmin(r, Rows - 1), 1),
-    c = fmax(fmin(c, Columns - 1), 1);
+	if (r < 0 || r >= Rows ||
+		c < 0 || c >= Columns)
+		return;
 
 /* Fetch the index and set the Screen.                                        */
 	int 
@@ -232,7 +234,7 @@ static void Handle(int Signal)
 }
 
 char 
-	Numbers[] =  {0x7d, 0x60, 0x37,0x67, 0x6a, 0x4f, 0x5f, 0x61, 0xff, 0x6b};
+	Numbers[] =  {0x7d, 0x18, 0x37,0x67, 0x6a, 0x4f, 0x5f, 0x61, 0xff, 0x6b};
 
 static void DrawSegment(int Num, int r, int c, int Size, Block b)
 {
